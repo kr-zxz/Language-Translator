@@ -1,7 +1,7 @@
 import streamlit as st
 import torch
 import torch.nn as nn
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 
 # Define the Encoder class
 class Encoder(nn.Module):
@@ -63,8 +63,8 @@ class Seq2Seq(nn.Module):
 st.title("Language Translator")
 st.write("Enter the text to translate and select the target language:")
 
-# Google Translator
-translator = Translator()
+# Translator
+translator = GoogleTranslator()
 
 # Input text from user
 input_text = st.text_input("Input Text")
@@ -92,5 +92,5 @@ target_language = st.selectbox("Select Target Language", list(languages.keys()))
 # Perform translation on button click
 if st.button("Translate"):
     if input_text:
-        translation = translator.translate(input_text, dest=languages[target_language])
-        st.write(f"Translated Text: {translation.text}")
+        translation = translator.translate(input_text, target_lang=languages[target_language])
+        st.write(f"Translated Text: {translation}")
